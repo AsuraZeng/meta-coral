@@ -43,4 +43,4 @@ PROVIDES += " \
     python3-tflite-runtime \
     ${@ d.getVar('PROVIDES_FULL') if not d.getVar('TENSORFLOW_LITEONLY') == '1' else ''}"
 
-DEB_BUILD_PROFILES += "${@ 'nofull' if d.getVar('TENSORFLOW_LITEONLY') == '1' else ''}"
+DEB_BUILD_PROFILES += "nocheck ${@ 'nofull' if d.getVar('TENSORFLOW_LITEONLY') == '1' else ''}"

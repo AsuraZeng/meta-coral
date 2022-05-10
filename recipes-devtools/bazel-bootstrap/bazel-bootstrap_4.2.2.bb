@@ -18,8 +18,16 @@ PACKAGE_ARCH = "${HOST_ARCH}"
 ISAR_CROSS_COMPILE = "1"
 
 PR = "1"
-SRC_URI = "https://github.com/bazelbuild/bazel/releases/download/${PV}/bazel-${PV}-dist.zip;subdir=bazel-${PV} \
-           file://bazel-${PV}/debian                                                                           "
-SRC_URI[sha256sum] = "9981d0d53a356c4e87962847750a97c9e8054e460854748006c80f0d7e2b2d33"
 
-S = "${WORKDIR}/bazel-${PV}"
+SRC_URI = "git://github.com/AsuraZeng/bazel.git;protocol=https;branch=${KERNEL_BRANCH}; \
+           file://debian                                                                           "
+
+KERNEL_BRANCH = "remove-4.2.2"
+SRCREV = "692f56491151affe33bb5bfe44b635c16434efc1"
+
+S = "${WORKDIR}/git"
+
+
+do_prepare_build() {
+    cp -r ${WORKDIR}/debian ${S}/
+}
